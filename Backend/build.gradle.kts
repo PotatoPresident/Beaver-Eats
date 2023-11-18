@@ -37,4 +37,6 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
     implementation("org.mongodb:mongodb-driver-kotlin-coroutine:4.11.0")
+    implementation("io.ktor:ktor-client-apache:2.3.6")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
 }
