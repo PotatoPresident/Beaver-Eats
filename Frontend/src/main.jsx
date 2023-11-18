@@ -8,7 +8,7 @@ import './index.css'
 
 const router = createBrowserRouter([
   { path: '/', element: <App />, errorElement: <Error /> },
-  { path: '/about', element: <About />, errorElement: <Error /> }
+  { path: '/about', element: <About />, errorElement: <Error /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
