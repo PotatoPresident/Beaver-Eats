@@ -1,11 +1,8 @@
 package org.beavereats.plugins
 
-import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.engine.apache.*
 import io.ktor.client.request.*
 import io.ktor.http.*
-import io.ktor.http.headers
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.response.*
@@ -32,18 +29,22 @@ fun Application.configureSecurity() {
             }
             client = httpClient
         }
-        session<UserSession> {
+        session<UserSession>("session") {
             validate { userSession ->
                 userSession
             }
             challenge {
-                call.respondRedirect("/login")
+                throw AuthenticationException()
             }
         }
     }
+
     install(Sessions) {
-        cookie<UserSession>("user_session")
+        cookie<UserSession>("user_session") {
+            cookie.extensions["SameSite"] = "lax"
+        }
     }
+
     routing {
         authenticate("auth-oauth-google") {
             get("login") {
@@ -60,6 +61,11 @@ fun Application.configureSecurity() {
                 call.sessions.set(UserSession(principal!!.state!!, principal.accessToken, userInfo.id))
                 call.respondRedirect("/home")
             }
+        }
+
+        get("/logout") {
+            call.sessions.clear<UserSession>()
+            call.respondRedirect("/")
         }
     }
 }

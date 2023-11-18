@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class UserInfo(
-    val id: String,
+    val id: String = "DEFAULT",
     val name: String,
     @SerialName("given_name") val givenName: String,
     val picture: String,

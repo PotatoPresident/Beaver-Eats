@@ -5,9 +5,10 @@ import org.beavereats.storage.database
 
 @Serializable
 data class Review(
-    val userId: String,
-    val rating: Int,
-    val review: String?
+    var userId: String?,
+    val locationId: String,
+    var rating: Int,
+    var review: String?
 )
 
 val reviews = database.getCollection<Review>("reviews")
