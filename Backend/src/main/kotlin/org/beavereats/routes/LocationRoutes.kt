@@ -10,7 +10,7 @@ import org.beavereats.models.locations
 fun Route.locationRouting() {
     route("/locations") {
         get {
-            call.respond(locations)
+            call.respond(locations.groupBy { it.group.displayName })
         }
 
         get("{group}") {

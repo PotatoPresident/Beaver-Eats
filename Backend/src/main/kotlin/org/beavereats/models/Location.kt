@@ -11,12 +11,12 @@ data class Location(
 //    val hours: Map<DayOfWeek, Int>
 )
 
-enum class LocationGroups {
-    McNary,
-    Arnold,
-    West,
-    MU,
-    Other
+enum class LocationGroups(val displayName: String) {
+    McNary("McNary"),
+    Arnold("Arnold"),
+    West("West"),
+    MU("Memorial Union"),
+    Other("Cafes & Markets")
 }
 
 val locations = listOf(
