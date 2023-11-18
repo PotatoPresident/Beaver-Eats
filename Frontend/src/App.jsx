@@ -45,19 +45,21 @@ const loader = new Loader({
 })
 loader.load().then(async() => {
   const { Map } = await google.maps.importLibrary('maps')
-  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
   new Map(document.getElementById('map'), {
     center: { lat: 44.564341, lng: -123.280790 },
     zoom: 17,
     disableDefaultUI: true,
   });
-  const priceTag = document.createElement("div");
-  priceTag.className = "bg-[#4285F4] text-white text-sm relative px-[15px] py-2.5 rounded-lg";
-  priceTag.textContent = "$2.5M";
 
-  new AdvancedMarkerElement({
-    Map,
-    position: { lat: 44.564341, lng: -123.280790 },
-    content: priceTag,
-  });
+  //tried to make a marker element according to google maps api but it didn't work
+  // const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+  // const priceTag = document.createElement("div");
+  // priceTag.className = "bg-[#4285F4] text-white text-sm relative px-[15px] py-2.5 rounded-lg";
+  // priceTag.textContent = "$2.5M";
+
+  // new AdvancedMarkerElement({
+  //   Map,
+  //   position: { lat: 44.564341, lng: -123.280790 },
+  //   content: priceTag,
+  // });
 })
