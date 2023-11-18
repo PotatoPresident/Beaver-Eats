@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Loader } from '@googlemaps/js-api-loader'
 import Navbar from './components/navbar'
 import Location from './components/location'
-import Login from "./components/login.jsx";
+import Login from './components/login.jsx'
 
 export default function App() {
 
@@ -18,20 +18,14 @@ export default function App() {
         })
         if(res.ok) setUser(await res.json())
         if(res.status === 401) setUser(null)
-      } catch (err) {
-        console.log(err)
-      }
+      } catch (err) { console.log(err) }
     }
     getUser()
   }, [user])
 
-  console.log(user)
-
   const [overflow, setOverflow] = useState('hidden')
   const bottom = useRef(null)
   const map = useRef(null)
-
-  
 
   function handleToggle() {
     if (overflow === 'hidden') {
@@ -46,7 +40,7 @@ export default function App() {
   return (
     <div className='flex h-screen'>
       { !user && (
-        <div className="absolute top-5 right-5 h-16 w-25 z-10">
+        <div className='absolute top-5 right-5 h-16 w-25 z-10'>
           <Login />
         </div>
       )}
@@ -83,7 +77,7 @@ const CORVALLIS = { lat: 44.564341, lng: -123.280790 }
 loader.load().then(async () => {
   const { Map } = await google.maps.importLibrary('maps')
   new Map(document.getElementById('map'), {
-    mapId: "54153603699e2b81",
+    mapId: '54153603699e2b81',
     center: CORVALLIS,
     restriction: {
       latLngBounds: CORVALLIS_BOUNDS,
@@ -95,10 +89,10 @@ loader.load().then(async () => {
   })
 
   //tried to make a marker element according to google maps api but it didn't work
-  // const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-  // const priceTag = document.createElement("div");
-  // priceTag.className = "bg-[#4285F4] text-white text-sm relative px-[15px] py-2.5 rounded-lg";
-  // priceTag.textContent = "$2.5M";
+  // const { AdvancedMarkerElement } = await google.maps.importLibrary('marker');
+  // const priceTag = document.createElement('div');
+  // priceTag.className = 'bg-[#4285F4] text-white text-sm relative px-[15px] py-2.5 rounded-lg';
+  // priceTag.textContent = '$2.5M';
 
   // new AdvancedMarkerElement({
   //   Map,

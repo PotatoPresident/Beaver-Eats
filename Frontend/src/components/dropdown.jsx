@@ -26,24 +26,23 @@ export default function Dropdown({location, options}) {
         leaveTo='transform opacity-0 scale-95'
       >
         <Menu.Items className=''>
-          <div className='py-1'>
-            { options.map((option) => {
-              return (
-                <Menu.Item>
-                  {({ active }) => (
-                    <div
-                      className={classNames(
-                        active ? 'text-neutral-500' : 'text-neutral-900',
-                        'block pl-4 py-2'
-                      )}
-                    >
-                      <a href='#'>{option}</a>
-                    </div>
-                  )}
-                </Menu.Item>
-              )
-            })}
-          </div>
+          { options.map((option) => {
+            console.log(option)
+            return (
+              <Menu.Item>
+                {({ active }) => (
+                  <div
+                    className={classNames(
+                      active ? 'text-neutral-500' : 'text-neutral-900',
+                      'block pl-4 pt-2'
+                    )}
+                  >
+                    <a href='#'>{option.displayName}</a>
+                  </div>
+                )}
+              </Menu.Item>
+            )
+          })}
         </Menu.Items>
       </Transition>
     </Menu>
