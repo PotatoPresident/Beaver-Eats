@@ -3,6 +3,7 @@ import { Loader } from '@googlemaps/js-api-loader'
 import Navbar from './components/navbar'
 import Login from './components/login'
 import Location from './components/location'
+import AuthButtons from './components/authbuttons'
 
 export default function App() {
 
@@ -44,9 +45,19 @@ const loader = new Loader({
 })
 loader.load().then(async() => {
   const { Map } = await google.maps.importLibrary('maps')
-
+  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
   new Map(document.getElementById('map'), {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 8,
+    center: { lat: 44.564341, lng: -123.280790 },
+    zoom: 17,
+    disableDefaultUI: true,
+  });
+  const priceTag = document.createElement("div");
+  priceTag.className = "bg-[#4285F4] text-white text-sm relative px-[15px] py-2.5 rounded-lg";
+  priceTag.textContent = "$2.5M";
+
+  new AdvancedMarkerElement({
+    Map,
+    position: { lat: 44.564341, lng: -123.280790 },
+    content: priceTag,
   });
 })
