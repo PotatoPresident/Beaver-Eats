@@ -12,6 +12,8 @@ import org.beavereats.env
 import org.beavereats.httpClient
 import org.beavereats.models.UserInfo
 
+val redirects = mutableMapOf<String, String>()
+
 fun Application.configureSecurity() {
     authentication {
         oauth("auth-oauth-google") {
@@ -24,7 +26,10 @@ fun Application.configureSecurity() {
                     requestMethod = HttpMethod.Post,
                     clientId = env["GOOGLE_CLIENT_ID"],
                     clientSecret = env["GOOGLE_CLIENT_SECRET"],
-                    defaultScopes = listOf("https://www.googleapis.com/auth/userinfo.profile")
+                    defaultScopes = listOf("https://www.googleapis.com/auth/userinfo.profile"),
+                    onStateCreated = { call, state ->
+                        redirects[state] = call.request.queryParameters["redirectUrl"] ?: "/home"
+                    }
                 )
             }
             client = httpClient
@@ -59,7 +64,8 @@ fun Application.configureSecurity() {
                     }
                 }.body()
                 call.sessions.set(UserSession(principal!!.state!!, principal.accessToken, userInfo.id))
-                call.respondRedirect("/home")
+                val redirectUrl = redirects[principal.state]
+                call.respondRedirect(redirectUrl!!)
             }
         }
 
