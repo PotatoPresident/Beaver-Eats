@@ -2,7 +2,7 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import Beaver from './beaver'
 import Dropdown from './dropdown'
-import pfp from '../assets/bocchi.jpeg'
+import pfp from '/bocchi.jpeg'
 
 export default function Navbar() {
   return (
