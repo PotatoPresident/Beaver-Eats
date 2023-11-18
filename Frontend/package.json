@@ -9,9 +9,19 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.16.2",
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
+    "@react-three/drei": "^9.88.16",
+    "@react-three/fiber": "^8.15.11",
+    "@types/three": "^0.158.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "three": "^0.158.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

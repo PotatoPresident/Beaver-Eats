@@ -1,12 +1,25 @@
-import Navbar from './components/navbar.jsx'
+import { Loader } from '@googlemaps/js-api-loader'
+import Navbar from './components/navbar'
 
-function App() {
+export default function App() {
 
   return (
-    <div className='w-screen h-screen'>
-      <Navbar />
+    <div className='flex'> 
+      <Navbar/>
+      <div id='map' className='flex w-full' />
     </div>
   )
 }
 
-export default App
+const loader = new Loader({
+  apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
+  version: 'weekly'
+})
+loader.load().then(async() => {
+  const { Map } = await google.maps.importLibrary('maps')
+
+  new Map(document.getElementById('map'), {
+    center: { lat: -34.397, lng: 150.644 },
+    zoom: 8,
+  });
+})

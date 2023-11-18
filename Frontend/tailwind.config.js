@@ -5,7 +5,13 @@ export default {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        GeistRegular: 'Geist-Regular',
+        GeistBold: 'Geist-Bold',
+        GeistBlack: 'Geist-Black',
+      }
+    },
   },
   plugins: [],
 }

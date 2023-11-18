@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  margin: 0
+@font-face {
+  font-family: 'Geist-Regular';
+  src: url('./assets/Geist-Regular.otf')
+}
+@font-face {
+  font-family: 'Geist-Bold';
+  src: url('./assets/Geist-Bold.otf')
+}
+@font-face {
+  font-family: 'Geist-Black';
+  src: url('./assets/Geist-Black.otf')
 }
