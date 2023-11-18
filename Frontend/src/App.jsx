@@ -12,7 +12,7 @@ export default function App() {
 }
 
 const loader = new Loader({
-  apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
+  apiKey: "AIzaSyCs4CKMrfMTvNVsxSHtf0LB6F2RTUjBW7M", //import.meta.env.VITE_GOOGLE_API_KEY,
   version: 'weekly'
 })
 loader.load().then(async() => {
