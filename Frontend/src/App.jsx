@@ -2,7 +2,7 @@ import { useState, useRef } from 'react'
 import { Loader } from '@googlemaps/js-api-loader'
 import Navbar from './components/navbar'
 import Location from './components/location'
-import AuthButtons from './components/authbuttons'
+import Login from "./components/login.jsx";
 
 export default function App() {
 
@@ -17,12 +17,15 @@ export default function App() {
     } else {
       setOverflow('hidden')
       map.current.scrollIntoView()
-    } 
+    }
   }
-    
+
   return (
-    <div className='flex h-screen'> 
-      <AuthButtons />
+    <>
+    <div className='flex h-screen'>
+      <div className="absolute top-5 right-5 h-16 w-25 z-10">
+        <Login />
+      </div>
       <div className='relative w-1/4 max-w-[263px]'><Navbar /></div>
       <main className='relative w-full h-full overflow-auto' style={{overflowY: overflow}}>
         <button onClick={handleToggle} className='z-10 rotate-180 absolute top-[90%] left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
@@ -36,6 +39,7 @@ export default function App() {
         </div>
       </main>
     </div>
+    </>
   )
 }
 
