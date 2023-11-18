@@ -23,6 +23,7 @@ export default function App() {
     
   return (
     <div className='flex h-screen'> 
+      <AuthButtons />
       <div className='relative w-1/4 max-w-[263px]'><Navbar /></div>
       <main className='relative w-full h-full overflow-auto' style={{overflowY: overflow}}>
         <button onClick={handleToggle} className='z-10 rotate-180 absolute top-[90%] left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
