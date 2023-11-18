@@ -1,32 +1,27 @@
-import { useRef, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { useRef } from 'react'
+import { useFrame } from '@react-three/fiber'
+import { useGLTF } from '@react-three/drei'
 
-function Box(props) {
+export default function Model(props) {
 
-  const ref = useRef()
+  const { nodes, materials } = useGLTF('/beaver.glb');
+  const meshRef = useRef();
 
+  useFrame(() => {
+    meshRef.current.position.set(0, 0, 0);
+  })
 
   return (
-    <mesh
-      {...props}
-      ref={ref}>
-      <boxGeometry args={[3, 3, 3]} />
-      <meshStandardMaterial color={'orange'} />
-    </mesh>
-  )
+    <group {...props} dispose={null}>
+      <mesh ref={meshRef}
+        castShadow
+        receiveShadow
+        geometry={nodes.Plane.geometry}
+        material={materials['Material.001']}
+        position={[2.836, 5.753, 0]}
+      />
+    </group>
+  );
 }
 
-export default function Beaver() {
-  return (
-    <div className='w-16 h-16'>
-      <Canvas>
-        <ambientLight intensity={Math.PI / 2} />
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
-        <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
-        <Box position={[0, 0, 0]} />
-        <OrbitControls />
-      </Canvas>
-    </div>
-  )
-}
+useGLTF.preload('/beaver.glb');
