@@ -4,13 +4,18 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import kotlinx.serialization.Serializable
+import org.beavereats.models.Location
 import org.beavereats.models.LocationGroups
 import org.beavereats.models.locations
+
+@Serializable
+private data class LocationParent(val name: String, val options: List<Location>)
 
 fun Route.locationRouting() {
     route("/locations") {
         get {
-            call.respond(locations.groupBy { it.group.displayName })
+            call.respond(locations.groupBy { it.group.displayName }.mapValues { LocationParent(it.key, it.value) }.values)
         }
 
         get("{group}") {
