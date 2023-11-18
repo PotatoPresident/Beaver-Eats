@@ -13,7 +13,7 @@ import org.beavereats.models.reviews
 import org.beavereats.plugins.UserSession
 
 fun Route.reviewRouting() {
-    route("/review") {
+    route("/reviews") {
         get("{location}") {
             val location = call.parameters["location"] ?: return@get call.respondText(
                 "Missing or malformed location",

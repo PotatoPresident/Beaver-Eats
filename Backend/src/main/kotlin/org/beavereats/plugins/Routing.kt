@@ -8,6 +8,7 @@ import io.ktor.server.routing.*
 import org.beavereats.routes.locationRouting
 import org.beavereats.routes.reviewRouting
 import org.beavereats.routes.testRouting
+import org.beavereats.routes.userRouting
 
 fun Application.configureRouting() {
     install(StatusPages) {
@@ -25,6 +26,7 @@ fun Application.configureRouting() {
         testRouting()
         locationRouting()
         reviewRouting()
+        userRouting()
     }
 }
 

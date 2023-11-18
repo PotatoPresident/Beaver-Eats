@@ -26,7 +26,10 @@ fun Application.configureSecurity() {
                     requestMethod = HttpMethod.Post,
                     clientId = env["GOOGLE_CLIENT_ID"],
                     clientSecret = env["GOOGLE_CLIENT_SECRET"],
-                    defaultScopes = listOf("https://www.googleapis.com/auth/userinfo.profile"),
+                    defaultScopes = listOf(
+                        "https://www.googleapis.com/auth/userinfo.profile",
+                        "https://www.googleapis.com/auth/userinfo.email"
+                    ),
                     onStateCreated = { call, state ->
                         redirects[state] = call.request.queryParameters["redirectUrl"] ?: "/home"
                     }

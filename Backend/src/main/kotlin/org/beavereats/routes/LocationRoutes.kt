@@ -8,7 +8,7 @@ import org.beavereats.models.LocationGroups
 import org.beavereats.models.locations
 
 fun Route.locationRouting() {
-    route("/location") {
+    route("/locations") {
         get {
             call.respond(locations)
         }

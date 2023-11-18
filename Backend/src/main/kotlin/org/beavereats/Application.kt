@@ -6,6 +6,7 @@ import io.ktor.client.engine.apache.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
+import kotlinx.serialization.json.Json
 import org.beavereats.plugins.configureMonitoring
 import org.beavereats.plugins.configureRouting
 import org.beavereats.plugins.configureSecurity
@@ -16,7 +17,9 @@ val env = dotenv {
 }
 val httpClient = HttpClient(Apache) {
     install (ContentNegotiation) {
-        json()
+        json(Json {
+            ignoreUnknownKeys = true
+        })
     }
 }
 
