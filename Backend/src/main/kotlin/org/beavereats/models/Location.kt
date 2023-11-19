@@ -1,5 +1,7 @@
 package org.beavereats.models
 
+import com.mongodb.client.model.Filters.eq
+import kotlinx.coroutines.flow.toList
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -13,8 +15,18 @@ data class Location(
     val lat: Double,
     val lng: Double,
     val images: List<String> = listOf("https://via.placeholder.com/150"),
-    var rating: Double = 5.0,
-)
+    var rating: Double = 5.0
+) {
+    suspend fun updateRating() {
+        reviews.find(eq(Location::id.name, this.id)).toList().let {
+            if (it.isEmpty()) {
+                this.rating = 5.0
+                return
+            }
+            this.rating = it.map { it.rating }.average()
+        }
+    }
+}
 
 enum class LocationGroups(val displayName: String) {
     McNary("McNary"),
