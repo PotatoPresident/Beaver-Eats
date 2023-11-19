@@ -30,10 +30,6 @@ export default function App() {
   const bottom = useRef(null)
   const map = useRef(null)
 
-  useEffect(() => {
-    bottom.current.scrollIntoView()
-  }, [])
-
   function handleToggle() {
     if (overflow.current === 'hidden') {
       overflow.current = 'auto'
@@ -43,6 +39,12 @@ export default function App() {
       map.current.scrollIntoView()
     }
   }
+  useEffect(() => {
+    if (selectedLocation) {
+      overflow.current = 'auto'
+      bottom.current.scrollIntoView()
+    }
+  }, [selectedLocation])
 
   return (
     <div className='flex h-screen'>
