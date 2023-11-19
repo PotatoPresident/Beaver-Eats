@@ -9,6 +9,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.coroutines.flow.toList
 import org.beavereats.models.Review
+import org.beavereats.models.locations
 import org.beavereats.models.reviews
 import org.beavereats.plugins.UserSession
 
@@ -45,6 +46,7 @@ fun Route.reviewRouting() {
                 } else {
                     call.respondText("Error storing review", status = HttpStatusCode.InternalServerError)
                 }
+                locations.find { it.id == location }?.updateRating()
             }
         }
     }

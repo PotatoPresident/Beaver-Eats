@@ -6,7 +6,9 @@ import io.ktor.client.engine.apache.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
+import org.beavereats.models.locations
 import org.beavereats.plugins.configureMonitoring
 import org.beavereats.plugins.configureRouting
 import org.beavereats.plugins.configureSecurity
@@ -25,6 +27,12 @@ val httpClient = HttpClient(Apache) {
 
 fun main(args: Array<String>) {
     io.ktor.server.netty.EngineMain.main(args)
+
+    runBlocking {
+        locations.forEach {
+            it.updateRating()
+        }
+    }
 }
 
 fun Application.module() {
