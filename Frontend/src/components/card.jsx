@@ -78,16 +78,32 @@ export default function Cards({ option }) {
       )}
       { isReviewsVisible && (
         <div className='flex flex-col text-sm text-neutral-500'>
-          <span className='text-sm text-neutral-500'>Rating: {option.rating}</span>
+          <span className='text-sm text-neutral-500'>Rating: {option.rating.toFixed(1)}</span>
           { reviews.map(review => {
             return (
                 <span className='text-sm text-neutral-500'>{review.review}</span>
             )
           })}
           <form method='post' onSubmit={handleSubmit}>
-            <input name='rating' placeholder='Rating'></input>
-            <input name='comment' placeholder='Comment'></input>
-            <button type='submit'>Submit Review</button>
+            <input
+            name='rating'
+            placeholder='Rating'
+            type='number'
+            min={1}
+            max={5}
+            step={0.1}
+            required
+            style={{ minWidth: '60px', appearance:'none'
+            }}/>
+            
+
+            <input
+            name='comment'
+            placeholder='Comment'/>
+
+            <button
+            type='submit'>Submit Review
+            </button>
           </form>
         </div>
       )}
