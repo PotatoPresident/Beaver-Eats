@@ -25,7 +25,7 @@ export default function Cards({ option }) {
   const [isImagesVisible, setIsImagesVisible] = useState(false)
 
   const handleClick = section => {
-    
+
     if (section === 'hours') {
       setIsHoursVisible(!isHoursVisible)
       setIsReviewsVisible(false)
@@ -48,9 +48,6 @@ export default function Cards({ option }) {
     formData.append('locationId', option.id)
     await fetch('/api/reviews', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
       body: formData,
     })
   }
@@ -67,7 +64,7 @@ export default function Cards({ option }) {
 
       { isHoursVisible && (
         <div className='flex flex-col text-sm text-neutral-500'>
-          <span className='text-sm text-neutral-500'>Hours: {option.opens}-{option.closes}</span>
+          <span className='text-sm text-neutral-500'>Hours: {formatHours(option.opens)}-{formatHours(option.closes)}</span>
         </div>
       )}
       { isReviewsVisible && (
@@ -93,4 +90,17 @@ export default function Cards({ option }) {
 
     </div>
   )
+}
+
+function formatHours(hours) {
+    //it is pm if hours from 12 onwards
+    const suffix = (hours >= 12)? 'pm' : 'am';
+
+    //only -12 from hours if it is greater than 12 (if not back at mid night)
+    hours = (hours > 12)? hours -12 : hours;
+
+    //if 00 then it is 12 am
+    hours = (hours == '00')? 12 : hours;
+
+    return `${hours}${suffix}`
 }

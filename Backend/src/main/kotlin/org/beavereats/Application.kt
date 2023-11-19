@@ -27,12 +27,6 @@ val httpClient = HttpClient(Apache) {
 
 fun main(args: Array<String>) {
     io.ktor.server.netty.EngineMain.main(args)
-
-    runBlocking {
-        locations.forEach {
-            it.updateRating()
-        }
-    }
 }
 
 fun Application.module() {
@@ -40,4 +34,10 @@ fun Application.module() {
     configureMonitoring()
     configureSerialization()
     configureRouting()
+
+    runBlocking {
+        locations.forEach {
+            it.updateRating()
+        }
+    }
 }
