@@ -2,13 +2,11 @@ import { useState, useEffect, createContext } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import Beaver from './beaver'
-import Dropdown from './dropdown'
 
+export default function Navbar({ user, state }) {
 
+  const [selectedLocation, setSelectedLocation] = state
 
-export default function Navbar({ user }) {
-
-  const [selectedLocation, setSelectedLocation] = useState(null)
   const handleClick = location => {
     setSelectedLocation(location)
   }
@@ -16,6 +14,7 @@ export default function Navbar({ user }) {
   const [locations, setLocations] = useState([])
   useEffect(() => {
     async function getLocations() {
+      console.log('[bottom] getting locations ')
       try {
         const res = await fetch('/api/locations', {
           method: 'GET',
@@ -47,7 +46,7 @@ export default function Navbar({ user }) {
           </div>
           <div className='flex flex-col py-5'>
             { locations.map((location) => {
-              return <div key={location.name} onClick={() => handleClick(location.name)} className='py-2'><Dropdown location={location.name} options={location.options}/></div>
+              return <div key={location.name} onClick={() => handleClick(location.options[0].group)} className='my-2 cursor-pointer'>{location.name}</div>
             })}
           </div>
         </div>

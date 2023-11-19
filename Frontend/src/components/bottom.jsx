@@ -1,15 +1,14 @@
-import { useEffect, useState, useRef, useContext } from 'react'
-import { LocationContext } from '../context/context'
+import { useEffect, useState, useRef } from 'react'
 import Card from './card'
 
-export default function Bottom() {
+export default function Bottom({ state }) {
 
-  const selectedLocation = useContext(LocationContext)
-  const [option, setOption] = useState(null)
-  console.log(selectedLocation)
+  const [selectedLocation, setSelectedLocation] = state
+  const [options, setOptions] = useState(null)
 
   useEffect(() => {
-    async function getOption() {
+    async function getOptions() {
+      console.log('[bottom] getting options')
       try {
         const res = await fetch(`/api/locations/${selectedLocation}`, {
           method: 'GET',
@@ -17,13 +16,15 @@ export default function Bottom() {
             'content-type': 'application/json'
           }
         })
-        if(res.ok) setOption(await res.json())
+        if(res.ok) setOptions(await res.json())
       } catch (err) { console.log(err) }
     }
-    getOption()
-  }, [])
+    getOptions()
 
-  console.log(option)
+    return () => {
+      console.log('Cleanup function - Component unmounted');
+    }
+  }, [selectedLocation])
 
   const [mouseDown, setMouseDown] = useState(false)
   const [startX, setStartX] = useState(0)
@@ -47,24 +48,14 @@ export default function Bottom() {
     const x = e.pageX - sliderRef.current.offsetLeft
     const scroll = x - startX
     sliderRef.current.scrollLeft = scrollLeft - scroll
-    console.log(scroll)
   }
 
   return (
-    <div className='overflow-x-auto border-t border-neutral-400' ref={sliderRef} onMouseMove={move} onMouseDown={startDragging} onMouseUp={stopDragging} onMouseLeave={stopDragging} >
-      <div className='flex h-[400px] min-w-min bg-white justify-betweem items-center gap-24'>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+    <div className='overflow-x-auto border-t border-neutral-400 px-24' ref={sliderRef} onMouseMove={move} onMouseDown={startDragging} onMouseUp={stopDragging} onMouseLeave={stopDragging} >
+      <div className='flex h-[400px] min-w-min bg-white justify-between items-center gap-24'>
+        { options && options.map(option => {
+          return <Card key={option.name} option={option} />
+        })}
       </div>
     </div>
   )

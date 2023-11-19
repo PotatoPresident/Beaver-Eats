@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect, createContext } from 'react'
-import { LocationContext } from './context/context'
 import Navbar from './components/navbar'
 import Map from './components/map'
 import Login from './components/login'
@@ -12,6 +11,7 @@ export default function App() {
   const [user, setUser] = useState(null)
   useEffect(() => {
     async function getUser() {
+      console.log('[bottom] getting user')
       try {
         const res = await fetch('/api/userinfo', {
           method: 'GET',
@@ -26,7 +26,6 @@ export default function App() {
     getUser()
   }, [])
 
-  console.log(user)
 
   const overflow = useRef('hidden');
   const bottom = useRef(null)
@@ -54,7 +53,7 @@ export default function App() {
         </div>
       )}
       <div className='relative w-1/4 max-w-[263px]'>
-        <Navbar user={user}/>
+        <Navbar user={user} state={[selectedLocation, setSelectedLocation]} />
       </div>
       <main className='relative w-full h-full overflow-auto' style={{overflowY: overflow}}>
         <button onClick={handleToggle} className='z-10 rotate-180 absolute top-[90%] left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
@@ -65,9 +64,7 @@ export default function App() {
         <div>
           <div ref={map}><Map /></div>
           <div ref={bottom}>
-            <LocationContext.Provider value={selectedLocation}>
-              <Bottom />
-            </LocationContext.Provider>
+            <Bottom state={[selectedLocation, setSelectedLocation]} />
           </div>
         </div>
       </main>
