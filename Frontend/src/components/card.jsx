@@ -56,10 +56,14 @@ export default function Cards({ option }) {
     <div className='flex flex-col justify-center items-center w-[400px] min-w-[400px] h-[300px] bg-neutral-100 border border-neutral-400 rounded-md shadow-xl'>
       <span className='font-GeistBold'>{option.displayName}</span>
       <span className='text-sm text-neutral-500'>{option.description}</span>
-      <div className='flex text-sm text-neutral-500 gap-4'>
-        <span onClick={() => handleClick('hours')}>Hours</span>
-        <span onClick={() => handleClick('reviews')}>Reviews</span>
-        <span onClick={() => handleClick('images')}>Images</span>
+      <div className='cursor-pointer flex text-sm text-neutral-500 gap-4 py-4'>
+        <div className="relative items-baseline hover:outline w-16 h-5 rounded">
+          <span className='flex justify-center items-center' onClick={() => handleClick('hours')}>Hours</span>
+        </div>
+        <div className="relative items-baseline hover:outline w-16 h-5 rounded"><span className='flex justify-center items-center' onClick={() => handleClick('reviews')}>Reviews</span>
+        </div>
+        <div className="relative items-baseline hover:outline w-16 h-5 rounded"><span className='flex justify-center items-center' onClick={() => handleClick('images')}>Images</span>
+        </div>
       </div>
 
       { isHoursVisible && (
@@ -78,8 +82,8 @@ export default function Cards({ option }) {
             )
           })}
           <form method='post' onSubmit={handleSubmit}>
-            <input name='rating' defaultValue='Rating'></input>
-            <input name='comment' defaultValue='Comment'></input>
+            <input name='rating' placeholder='Rating'></input>
+            <input name='comment' placeholder='Comment'></input>
             <button type='submit'>Submit Review</button>
           </form>
         </div>
