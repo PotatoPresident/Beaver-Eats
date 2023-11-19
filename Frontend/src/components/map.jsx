@@ -17,8 +17,15 @@ export default function Map() {
   const CORVALLIS = { lat: 44.564341, lng: -123.280790 }
   
   loader.load().then(async () => {
+    const locations = await (await fetch('/api/locations', {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })).json()
     const { Map } = await google.maps.importLibrary('maps')
-    new Map(document.getElementById('map'), {
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+    const map = new Map(document.getElementById('map'), {
       mapId: '54153603699e2b81',
       center: CORVALLIS,
       restriction: {
@@ -28,6 +35,16 @@ export default function Map() {
       minZoom: 17,
       zoom: 17,
       disableDefaultUI: true,
+    })
+
+    locations.map((group) => {
+      group.options.map((option) => {
+        const marker = new AdvancedMarkerElement({
+          map,
+          position: {lat: option.lat, lng: option.lng},
+          title: option.displayName,
+        });
+      })
     })
   })
 

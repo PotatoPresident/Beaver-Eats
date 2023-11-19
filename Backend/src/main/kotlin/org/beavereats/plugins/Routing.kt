@@ -5,10 +5,7 @@ import io.ktor.server.application.*
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import org.beavereats.routes.locationRouting
-import org.beavereats.routes.reviewRouting
-import org.beavereats.routes.testRouting
-import org.beavereats.routes.userRouting
+import org.beavereats.routes.*
 
 fun Application.configureRouting() {
     install(StatusPages) {
@@ -23,10 +20,18 @@ fun Application.configureRouting() {
         }
     }
     routing {
+        route("/api") {
+            testRouting()
+            locationRouting()
+            reviewRouting()
+            userRouting()
+            authRouting()
+        }
         testRouting()
         locationRouting()
         reviewRouting()
         userRouting()
+        authRouting()
     }
 }
 
