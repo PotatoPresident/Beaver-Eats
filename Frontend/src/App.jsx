@@ -62,7 +62,7 @@ export default function App() {
           </div>
         </button>
         <div>
-          <div ref={map}><Map /></div>
+          <div ref={map}><Map state={ [selectedLocation, setSelectedLocation ]} /></div>
           <div ref={bottom}>
             <Bottom state={[selectedLocation, setSelectedLocation]} />
           </div>

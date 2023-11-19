@@ -1,7 +1,7 @@
 import { Loader } from '@googlemaps/js-api-loader'
 
-export default function Map() {
-
+export default function Map({state}) {
+  const [selectedLocation, setSelectedLocation] = state;
   const loader = new Loader({
     apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
     version: 'weekly'
@@ -43,6 +43,9 @@ export default function Map() {
           map,
           position: {lat: option.lat, lng: option.lng},
           title: option.displayName,
+        });
+        marker.addListener("click", () => {
+          setSelectedLocation(option.group)
         });
       })
     })
