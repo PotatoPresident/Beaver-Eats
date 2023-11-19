@@ -27,11 +27,11 @@ export default function Dropdown({location, options}) {
       >
         <Menu.Items className=''>
           { options.map((option) => {
-            console.log(option)
             return (
-              <Menu.Item>
+              <Menu.Item key={option.displayName}>
                 {({ active }) => (
                   <div
+                    
                     className={classNames(
                       active ? 'text-neutral-500' : 'text-neutral-900',
                       'block pl-4 pt-2'

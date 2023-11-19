@@ -14,3 +14,7 @@
   font-family: 'Geist-Black';
   src: url('./assets/Geist-Black.otf')
 }
+
+*::-webkit-scrollbar {
+  display: none;
+}

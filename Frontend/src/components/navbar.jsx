@@ -1,11 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, createContext } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import Beaver from './beaver'
 import Dropdown from './dropdown'
 
 
+
 export default function Navbar({ user }) {
+
+  const [selectedLocation, setSelectedLocation] = useState(null)
+  const handleClick = location => {
+    setSelectedLocation(location)
+  }
 
   const [locations, setLocations] = useState([])
   useEffect(() => {
@@ -21,9 +27,7 @@ export default function Navbar({ user }) {
       } catch (err) { console.log(err) }
     }
     getLocations()
-  }, [locations])
-
-  console.log(locations)
+  }, [])
 
   return (
     <nav className='h-full py-8 px-5 bg-neutral-50 border-r border-neutral-400 font-GeistRegular'>
@@ -43,7 +47,7 @@ export default function Navbar({ user }) {
           </div>
           <div className='flex flex-col py-5'>
             { locations.map((location) => {
-              return <div className='py-2'><Dropdown location={location.name} options={location.options}/></div>
+              return <div key={location.name} onClick={() => handleClick(location.name)} className='py-2'><Dropdown location={location.name} options={location.options}/></div>
             })}
           </div>
         </div>
