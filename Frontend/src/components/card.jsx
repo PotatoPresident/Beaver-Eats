@@ -93,16 +93,18 @@ export default function Cards({ option }) {
             max={5}
             step={0.1}
             required
-            style={{ minWidth: '60px', appearance:'none'
+            style={{ minWidth: '60px', appearance:'none', margin: '0 5px'
             }}/>
             
 
             <input
             name='comment'
-            placeholder='Comment'/>
-
+            placeholder='Comment'
+            style={{margin:'0 15px'}}/>
+            
             <button
             type='submit'>Submit Review
+            
             </button>
           </form>
         </div>
