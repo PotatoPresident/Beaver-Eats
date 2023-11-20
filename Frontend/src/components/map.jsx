@@ -1,4 +1,5 @@
 import { Loader } from '@googlemaps/js-api-loader'
+import { MarkerWithLabel } from '@googlemaps/markerwithlabel';
 
 export default function Map({ state }) {
   const [selectedLocation, setSelectedLocation] = state
@@ -25,8 +26,7 @@ export default function Map({ state }) {
     })).json()
 
     const { Map } = await google.maps.importLibrary('maps')
-    const { AdvancedMarkerElement } = await google.maps.importLibrary('marker')
-    
+
     const map = new Map(document.getElementById('map'), {
       mapId: '54153603699e2b81',
       center: CORVALLIS,
@@ -39,13 +39,17 @@ export default function Map({ state }) {
       disableDefaultUI: true,
     })
 
+
+    const markers = []
     locations.map((group) => {
       group.options.map((option) => {
-        const marker = new AdvancedMarkerElement({
-          map,
+        const marker = new MarkerWithLabel({
+          map: map,
           position: {lat: option.lat, lng: option.lng},
-          title: option.displayName,
-        })
+          labelContent: option.displayName, // can also be HTMLElement
+          labelAnchor: new google.maps.Point(-21, 3),
+          labelClass: "labels", // the CSS class for the label
+      })
         marker.addListener('click', () => {
           setSelectedLocation(option.group)
           const clickedMarkerCoords = {lat: option.lat, lng: option.lng}
@@ -74,6 +78,7 @@ export default function Map({ state }) {
             map.setZoom(16.75)
             break
         }
+        markers.push(marker)
       })
     })
   })
