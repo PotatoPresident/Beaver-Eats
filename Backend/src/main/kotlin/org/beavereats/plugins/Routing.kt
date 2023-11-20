@@ -28,14 +28,14 @@ fun Application.configureRouting() {
             reviewRouting()
             userRouting()
             authRouting()
-            staticFiles("/images", File("restaurantlLogos"))
+            staticResources("/images", "restaurantlLogos")
         }
         testRouting()
         locationRouting()
         reviewRouting()
         userRouting()
         authRouting()
-        staticFiles("/images", File("restaurantlLogos"))
+        staticResources("/images", "restaurantlLogos")
     }
 }
 
