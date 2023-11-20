@@ -1,7 +1,7 @@
 import { useState, useEffect, createContext } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
-import Beaver from './beaver'
+import pfp from '../assets/beaverpng.png'
 
 export default function Navbar({ user, state }) {
 
@@ -32,16 +32,8 @@ export default function Navbar({ user, state }) {
     <nav className='h-full py-8 px-5 bg-neutral-50 border-r border-neutral-400 font-GeistRegular'>
       <div className='flex flex-col justify-between h-full'>
         <div>
-          <div className='flex'>
-            <div className='w-14 h-14'>
-              <Canvas>
-                <ambientLight intensity={Math.PI / 2} />
-                <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
-                <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
-                <Beaver />
-                <OrbitControls />
-              </Canvas>
-            </div>
+          <div className='flex items-center gap-4'>
+            <img src={pfp} className='w-14 h-14'></img>
             <span>Beaver Eats</span>
           </div>
           <div className='flex flex-col py-5'>
