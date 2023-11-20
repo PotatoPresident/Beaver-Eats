@@ -18,3 +18,11 @@
 *::-webkit-scrollbar {
   display: none;
 }
+
+.labels {
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  border-color: rgb(77, 83, 86);
+  border-radius: 5px;
+  padding: 2px;
+}
