@@ -22,7 +22,7 @@ export default function Cards({ option }) {
 
   const [isHoursVisible, setIsHoursVisible] = useState(false)
   const [isReviewsVisible, setIsReviewsVisible] = useState(false)
-  const [isOverviewVisible, setOverview] = useState(false)
+  const [isOverviewVisible, setOverview] = useState(true)
 
   const handleClick = section => {
 
@@ -94,7 +94,7 @@ export default function Cards({ option }) {
           </div>
           <form method='post' onSubmit={handleSubmit}>
             <input
-              className='rounded min-w-[50px] border border-neutral-400 p-1 outline-none'
+              className='rounded min-w-[50px] border border-neutral-400 p-1 outline-none mr-2'
               name='rating'
               placeholder='Rating'
               type='number'
@@ -104,16 +104,11 @@ export default function Cards({ option }) {
               required
             />
             <input
-              className='rounded min-w-[80px] border border-neutral-400 p-1 outline-none'
+              className='rounded min-w-[80px] border border-neutral-400 p-1 outline-none mr-2'
               name='comment'
               placeholder='Comment'
-              style={{margin:'0 15px'}}
             />
-            
-            <button
-            type='submit'>Submit Review
-            
-            </button>
+            <button type='submit'>Submit Review</button>
           </form>
         </div>
       )}
